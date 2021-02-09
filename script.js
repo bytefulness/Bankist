@@ -32,6 +32,7 @@ document.addEventListener('keydown', function (e) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// LECTURES
 
+/* 
 // LECTURE #183: SELECTING, CREATING AND DELETING ELEMENTS
 
 // # SELECTING ELEMENTS
@@ -79,6 +80,9 @@ document
 //   `<div><p>Hi there! I hope you're doing well.</p></div>`
 // );
 
+*/
+
+/* 
 // LECTURE #184: STYLES, ATTRIBUTES AND CLASSES
 
 // ## STYLES
@@ -128,3 +132,42 @@ logo.classList.add('c', 'j'); // Adding two class
 logo.classList.remove('c', 'j');
 logo.classList.toggle('c');
 logo.classList.contains('c'); // Attention: Not includes
+*/
+
+// LECTURE #185: IMPLEMENTING SMOOTH SCROLLING
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coord = section1.getBoundingClientRect();
+  console.log('S1COORD', s1coord);
+
+  console.log('BUTTON COORD', e.target.getBoundingClientRect());
+
+  // Find Current Scroll
+  console.log('Current Scroll X/Y', window.pageXOffset, window.pageYOffset);
+
+  // Client (Browser Heigth and Width)
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+
+  // window.scrollTo(
+  //   s1coord.left + window.pageXOffset,
+  //   s1coord.top + window.pageYOffset
+  // );
+
+  // Scrolling Smoothly
+  // window.scrollTo({
+  //   left: s1coord.left + window.pageXOffset,
+  //   top: s1coord.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Modern Way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
