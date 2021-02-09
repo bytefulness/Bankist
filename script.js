@@ -172,20 +172,20 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-// LECTURE #186: TYPES OF EVENT AND EVENT HANDLER
+/* // LECTURE #186: TYPES OF EVENT AND EVENT HANDLER
 
 const h1 = document.querySelector('h1');
 
-// Modern Way to add eventListener
-// h1.addEventListener('mouseenter', function (e) {
-//   alert("Great! You 're reading the heading");
-// });
+Modern Way to add eventListener
+h1.addEventListener('mouseenter', function (e) {
+  alert("Great! You 're reading the heading");
+});
 
-// Old School on JS File
-// h1.onclick(alert('Hi!'));
+Old School on JS File
+h1.onclick(alert('Hi!'));
 
-// Stopping Event Listener after the run once
-// You have to export Event Handler
+Stopping Event Listener after the run once
+You have to export Event Handler
 
 const alertH1 = function () {
   alert("Great! You 're reading the heading");
@@ -193,4 +193,31 @@ const alertH1 = function () {
   h1.removeEventListener('click', alertH1);
 };
 
-h1.addEventListener('click', alertH1);
+h1.addEventListener('click', alertH1); */
+
+// LECTURE #188: EVENT PROPAGATION IN PRACTISE
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) - min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 155)}, ${randomInt(0, 155)}, ${randomInt(0, 155)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  /* 
+    ? How can we stop propagation?
+    * e.stopPropagation();
+  */
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
