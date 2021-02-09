@@ -171,3 +171,26 @@ btnScrollTo.addEventListener('click', function (e) {
   // Modern Way
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// LECTURE #186: TYPES OF EVENT AND EVENT HANDLER
+
+const h1 = document.querySelector('h1');
+
+// Modern Way to add eventListener
+// h1.addEventListener('mouseenter', function (e) {
+//   alert("Great! You 're reading the heading");
+// });
+
+// Old School on JS File
+// h1.onclick(alert('Hi!'));
+
+// Stopping Event Listener after the run once
+// You have to export Event Handler
+
+const alertH1 = function () {
+  alert("Great! You 're reading the heading");
+
+  h1.removeEventListener('click', alertH1);
+};
+
+h1.addEventListener('click', alertH1);
