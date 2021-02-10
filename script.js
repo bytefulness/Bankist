@@ -1,12 +1,16 @@
 'use strict';
 
-///////////////////////////////////////
 // Modal window
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+///////////////////////////////////////
 
 const openModal = function (e) {
   e.preventDefault();
@@ -29,6 +33,56 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coord = section1.getBoundingClientRect();
+  console.log('S1COORD', s1coord);
+
+  console.log('BUTTON COORD', e.target.getBoundingClientRect());
+
+  // Find Current Scroll
+  console.log('Current Scroll X/Y', window.pageXOffset, window.pageYOffset);
+
+  // Client (Browser Heigth and Width)
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+
+  // window.scrollTo(
+  //   s1coord.left + window.pageXOffset,
+  //   s1coord.top + window.pageYOffset
+  // );
+
+  // Scrolling Smoothly
+  // window.scrollTo({
+  //   left: s1coord.left + window.pageXOffset,
+  //   top: s1coord.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Modern Way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+/*
+ * Navigation
+ */
+
+// 1. Create Event Delegation for common parent element
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// 2. Determine the target element that returns events
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// LECTURES
 
@@ -133,7 +187,7 @@ logo.classList.remove('c', 'j');
 logo.classList.toggle('c');
 logo.classList.contains('c'); // Attention: Not includes
 */
-
+/* 
 // LECTURE #185: IMPLEMENTING SMOOTH SCROLLING
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
@@ -171,7 +225,7 @@ btnScrollTo.addEventListener('click', function (e) {
   // Modern Way
   section1.scrollIntoView({ behavior: 'smooth' });
 });
-
+ */
 /* // LECTURE #186: TYPES OF EVENT AND EVENT HANDLER
 
 const h1 = document.querySelector('h1');
@@ -197,6 +251,7 @@ h1.addEventListener('click', alertH1); */
 
 // LECTURE #188: EVENT PROPAGATION IN PRACTISE
 
+/* 
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) - min);
 
@@ -206,10 +261,10 @@ const randomColor = () =>
 document.querySelector('.nav__link').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('LINK', e.target, e.currentTarget);
-  /* 
+  
     ? How can we stop propagation?
     * e.stopPropagation();
-  */
+  
 });
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
@@ -221,3 +276,4 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+*/
