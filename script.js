@@ -10,6 +10,14 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
+// Tabbed Component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// Fade Menu
+const nav = document.querySelector('.nav');
+
 ///////////////////////////////////////
 
 const openModal = function (e) {
@@ -84,10 +92,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // 2. Determine the target element that returns events
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
 
@@ -107,6 +111,30 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu Fade Animation
+// Refactoring
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    // Determine on which happended event
+    const link = e.target;
+    // Select sibling elements
+    const sibling = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    sibling.forEach(el => {
+      if (link !== el) el.style.opacity = this;
+    });
+
+    logo.style.opacity = this;
+  }
+};
+
+// REFACTORING: We're going to change this value by bind method.
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+// We need opposite one to get back everything
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// LECTURES
 
