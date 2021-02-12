@@ -136,6 +136,44 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 // We need opposite one to get back everything
 nav.addEventListener('mouseout', handleHover.bind(1));
 
+/* 
+  * Example Intersection Observer API
+ 
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+const obsOptions = {
+  root: null, // It's viewport
+  threshold: 0.2, // 10%
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1); */
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+console.log(navHeight);
+
+const stickyNav = function (entries) {
+  // Entries means thresholds in options
+
+  // It's the same entry = entries[0];
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  // rootMargin: '-90px', // When intersection is gone. Example: Before 90px target element (header)
+  rootMargin: `-${navHeight}px`, // Get dynamically nav height. Note: Just works px not rem or percentage
+});
+headerObserver.observe(header);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// LECTURES
 
 /* 
